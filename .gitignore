@@ -9,7 +9,6 @@ __pycache__/
 data/
 sessions/
 qr/
-pg/
 evolution-api/
 instances/
 store/
