@@ -1,6 +1,6 @@
 # Instalação da Evolution API (local)
 
-Guia para subir a Evolution API localmente, usada para ler grupos e enviar relatórios via sessão WhatsApp Web.
+Guia para subir a Evolution API localmente, usada para ler grupos e enviar relatórios via WhatsApp Web.
 
 > ⚠️ A Evolution API usa sessão de WhatsApp Web, que não é oficial. Há risco de bloqueio do número. Use número dedicado (recomendado, não obrigatório) e envios em volume baixo.
 
@@ -30,36 +30,40 @@ Guia para subir a Evolution API localmente, usada para ler grupos e enviar relat
 
 ## 5. Subir o serviço
 
-- Dentro de `evolution-api/`, rode `node dist/main.js`.
-- A API sobe na porta definida em `SERVER_PORT` (padrão 8080), apenas em 127.0.0.1.
-- Para reiniciar após trocar o `.env`, pare o processo atual e suba de novo. Um processo antigo continua com a configuração anterior.
+- Use o script idempotente: `sh bin/start-local.sh`. Ele sobe o PostgreSQL (5433) e a Evolution API somente se ainda não estiverem ativos.
+- A Evolution escuta somente em `127.0.0.1:8080`. Isso é feito pelo módulo `bin/localhost-only.cjs`, carregado via `NODE_OPTIONS=--require`, sem alterar o código da Evolution. Assim a porta não fica acessível pela rede.
+- Logs ficam em `logs/evolution-8080.log`, que não vai para o Git.
+- Após reinício do computador, rode `sh bin/start-local.sh` novamente.
+- Para reiniciar com a configuração nova, encerre o processo atual da Evolution e rode o script de novo. Um processo antigo continua com a configuração anterior.
 
 ## 6. Validar a instalação
 
 Faça uma requisição autenticada com o cabeçalho `apikey` (use a chave do seu `.env`, sem colá-la em lugar nenhum):
 
 ```
-GET http://127.0.0.1:<SERVER_PORT>/instance/fetchInstances
+GET http://127.0.0.1:8080/instance/fetchInstances
 header: apikey: <sua chave do .env>
 ```
 
 - Resposta 200: instalação válida.
-- Resposta 401: chave incorreta ou processo ainda com a configuração antiga.
+- Resposta 401: chave incorreta, ou processo ainda com a configuração antiga.
+- Confirme a escuta local com `ss -ltn`: deve aparecer `127.0.0.1:8080`, e não `*:8080`.
 
 ## 7. Conectar o WhatsApp (somente com aprovação do dono)
 
-- Criar instância e exibir QR code só quando o dono pedir. Nunca versionar QR code.
-- Após conectar, listar os grupos ativos e o dono escolhe quais monitorar.
+- Criar instância e exibir QR code só quando o dono pedir. Nunca versione QR code.
+- Após conectar, liste os grupos ativos e o dono escolhe quais monitorar.
+- Nenhum envio real acontece sem aprovação explícita, caso a caso.
 
 ## 8. O que nunca vai para o repositório
 
-- `.env`, `.pgpass`, pasta de dados do PostgreSQL, logs, sessões do WhatsApp e QR codes.
+- `.env`, `.pgpass`, dados do PostgreSQL (`pgdata/`), logs, sessões do WhatsApp e QR codes.
 - Qualquer token, chave, senha ou valor parcial deles.
 
 ## 9. Checklist de segurança
 
 - [ ] Senha do banco trocada e fora de logs.
 - [ ] `.env` e `.pgpass` com permissão 600.
-- [ ] API escutando apenas em 127.0.0.1.
+- [ ] Evolution escutando somente em `127.0.0.1:8080`.
 - [ ] Chave de API regerada após qualquer exposição.
-- [ ] Nenhum envio real sem aprovação explícita do dono, caso a caso.
+- [ ] Nenhum envio real sem aprovação explícita do dono.
