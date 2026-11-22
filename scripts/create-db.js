@@ -2,10 +2,10 @@
 // Uso: node scripts/create-db.js
 // Variáveis opcionais: PG_HOST (127.0.0.1), PG_PORT (5433), PG_USER (evo),
 // PG_DATABASE (evolution_api), PG_PASSWORD_FILE (.pgpass na raiz do repo).
-// Requer 'pg' instalado em evolution-api/node_modules. Nunca imprime a senha.
+// Requer `npm ci` na raiz (módulo 'pg'). Nunca imprime a senha.
 const fs = require('fs');
 const path = require('path');
-const { Client } = require(path.join(__dirname, '..', 'evolution-api', 'node_modules', 'pg'));
+const { Client } = require('pg');
 
 const host = process.env.PG_HOST || '127.0.0.1';
 const port = Number(process.env.PG_PORT || 5433);
