@@ -49,7 +49,7 @@ Conduza nesta ordem, uma pergunta por vez, e só avance com a resposta do usuár
 
 ## Estado atual (2026-11-22)
 
-- Infraestrutura local pronta (PostgreSQL 5433 e Evolution 8080, só em 127.0.0.1). Os dois serviços foram subidos em 2026-11-22 14:01 (America/Fortaleza) e a API valida com `scripts/check-api.js`.
+- Infraestrutura local pronta (PostgreSQL 5433 e Evolution 8080, só em 127.0.0.1). Os dois serviços foram subidos em 2026-11-22 11:01 (America/Fortaleza, 14:01 UTC) e a API valida com `scripts/check-api.js`.
 - Instância `whatsapp-report` existe com status `close`: nenhum WhatsApp conectado, nenhum QR gerado, nenhuma mensagem enviada.
 - Produto MVP implementado com testes (`npm test`, 39 testes passando). Veja `docs/produto-mvp.md`.
 - Pendente: conexão do WhatsApp (QR, pedido ao dono), escolha dos grupos e destinatários (setup do usuário), confirmação do teto diário, primeiro envio de teste (caso a caso), revogação do token GitHub e revisão de termos e preços antes de distribuir.
