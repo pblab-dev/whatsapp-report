@@ -2,27 +2,40 @@
 
 SaaS de relatórios de grupos de WhatsApp. Coleta dados de grupos escolhidos pelo usuário, gera relatórios e os envia a destinatários pela Evolution API instalada localmente.
 
-## Regra de consumo (novos bots)
+## Como começar (novo bot ou novo ambiente)
 
-Este repositório é a fonte única de scripts, utilitários e documentação do projeto. Todo bot novo, ou todo bot que reinicializar, deve:
+1. Clone este repositório e rode `npm ci` na raiz.
+2. Leia, nesta ordem: `docs/decisoes.md` (decisões aprovadas pelo dono), `docs/regras.md` (regras de trabalho), `docs/instrucoes-bot.md` (instruções-base do bot) e `docs/bootstrap.md` (passo a passo do zero).
+3. Siga `docs/bootstrap.md`. Ele usa os scripts de `scripts/` para criar a senha e o banco, gerar `evolution-api/.env` e validar a API.
+4. Para operar e controlar os processos, use `docs/evolution-setup.md`.
 
-1. Clonar `github.com/pblab-dev/whatsapp-report` (ou atualizar com `git pull`) antes de qualquer instalação.
-2. Ler `docs/decisoes.md` (decisões aprovadas pelo dono) e `docs/bootstrap.md` (passo a passo).
-3. Copiar `.env.example` para `.env` local e preencher apenas valores locais. O `.env` nunca vai para o git.
-4. Usar os scripts da pasta `scripts/` para criar o banco e gerar o `.env` da Evolution API.
-5. Não criar script, util ou fluxo novo fora deste repositório sem registrá-lo aqui e em `docs/`.
+Antes de qualquer instalação, atualize o clone com `git pull`.
+
+## Regras para novos bots
+
+- Este repositório é a fonte única de scripts, utilitários e documentação do projeto.
+- Nunca versionar `.env`, `.pgpass`, chaves, tokens, senhas, sessões, QR codes, dumps ou logs com dados pessoais.
+- Não criar script, util ou fluxo fora deste repositório sem registrá-lo aqui e em `docs/`.
+- Criar instâncias, rotinas ou envios reais exige aprovação explícita do dono.
 
 ## Estrutura
 
 - `docs/decisoes.md`: decisões de produto aprovadas pelo dono.
+- `docs/regras.md`: regras de trabalho e de segurança.
+- `docs/instrucoes-bot.md`: instruções-base para um bot novo, sem segredos.
 - `docs/bootstrap.md`: passo a passo para inicializar o ambiente do zero.
+- `docs/evolution-setup.md`: operação da Evolution API (controle de processos, validação, rotação de segredos).
 - `docs/mapa-funcoes.md`: mapa de funções, observado publicamente e sem cópia de terceiros.
+- `bin/start-local.sh`: sobe, para e mostra o status do PostgreSQL (5433) e da Evolution API (8080), somente em `127.0.0.1`.
+- `bin/localhost-only.cjs`: força a Evolution a escutar só em `127.0.0.1`, sem alterar o código dela.
 - `scripts/create-db.js`: cria o banco `evolution_api` no PostgreSQL local.
-- `scripts/make-env.js`: gera o `.env` da Evolution API com chave aleatória e sem exibir valores.
-- `scripts/rotate-pg-password.js`: troca a senha do usuário do banco e atualiza o arquivo de senha local.
-- `.env.example`: variáveis de ambiente, sem valores.
+- `scripts/make-env.js`: gera `evolution-api/.env` com chave de API aleatória, sem exibir valores.
+- `scripts/rotate-pg-password.js`: troca a senha do usuário do banco e atualiza o `.pgpass`.
+- `scripts/check-api.js`: valida a Evolution (401 sem chave, 200 com chave), sem exibir a chave.
+- `package.json` e `package-lock.json`: dependências fixadas (`pg` e PostgreSQL embutido).
+- `.env.example`: variáveis do app, sem valores.
 
-A Evolution API (código oficial, upstream) não é versionada aqui. Ela é clonada para `evolution-api/`, que está no `.gitignore`.
+A Evolution API (código oficial, upstream, tag `2.3.7`) não é versionada aqui. Ela é clonada para `evolution-api/`, que está no `.gitignore`.
 
 ## Regras de segurança
 
@@ -33,6 +46,6 @@ A Evolution API (código oficial, upstream) não é versionada aqui. Ela é clon
 
 ## Status
 
-Fase de planejamento. A Evolution API é o caminho único para leitura de grupos e envio de relatórios, em volume baixo no início. A Cloud API da Meta está fora do MVP e saiu deste repositório (permanece no histórico do git).
+Fase de planejamento e infraestrutura local. Já estão prontos: ambiente local com PostgreSQL e Evolution API, controle de processos, validação da API e guia de bootstrap. Ainda não estão implementados: coleta de dados, geração de relatórios, agendamento e envio pela Evolution.
 
-Ainda não publicado: `docs/evolution-setup.md`. Ele será publicado somente após validar a instalação local.
+A Evolution API é o caminho único para leitura de grupos e envio de relatórios, em volume baixo no início. A Cloud API da Meta está fora do MVP e saiu deste repositório (permanece no histórico do git).
