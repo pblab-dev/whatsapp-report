@@ -40,6 +40,7 @@ sh bin/start-local.sh start-evo # só a Evolution
 
 - Antes de subir, o script checa a porta. Se ela estiver ocupada por um processo **sem PID registrado**, ele aborta e reporta. Não mate o processo às cegas: identifique o dono antes.
 - Os PIDs ficam em `run/postgres.pid` e `run/evolution.pid`. Nunca suba um serviço sem registrar o PID.
+- **PID obsoleto:** após reinício do computador, o arquivo de PID pode apontar para um processo que não existe mais. Se o `status` mostrar a porta 5433 em LISTEN sem PID vivo, confirme que o processo é do nosso cluster (o `pgdata/postmaster.pid` aponta para ele e o `-D` é `pgdata/`). Só então grave o PID real com `head -1 pgdata/postmaster.pid > run/postgres.pid`. Não faça isso com processos de outra origem.
 - Parada: SIGTERM, espera até 30 s, depois SIGKILL.
 - A Evolution escuta somente em `127.0.0.1:8080`, via `bin/localhost-only.cjs` carregado com `NODE_OPTIONS=--require`, sem alterar o código da Evolution.
 - Logs: `logs/evolution-8080.log`, `logs/control.log` e `pg.log`. Não vão para o Git.
@@ -60,9 +61,9 @@ Uma subida manual da Evolution, feita sem checar a porta nem gravar o PID, deixo
 
 ## 7. Trocar segredos (rotação)
 
-Faça a rotação sempre que um segredo aparecer em log, chat ou arquivo versionado:
+Faça a rotação sempre que um segredo aparecer em log, chat ou arquivo versionado. O repositório traz `scripts/rotate-pg-password.js` para a troca da senha do banco.
 
-1. Troque a senha do usuário `evo` no PostgreSQL (`ALTER USER`), com senha gerada de forma aleatória.
+1. Troque a senha do usuário `evo` no PostgreSQL (`ALTER USER`), com senha gerada de forma aleatória (`scripts/rotate-pg-password.js`).
 2. Valide a nova senha com uma conexão de teste.
 3. Atualize a URI de `DATABASE_CONNECTION_URI` no `.env` e regrave `.pgpass` (só a senha, 600).
 4. Regere `AUTHENTICATION_API_KEY` (aleatória, 600) no `.env`, ou rode `make-env.js` de novo.
@@ -71,7 +72,8 @@ Faça a rotação sempre que um segredo aparecer em log, chat ou arquivo version
 
 ## 8. Conectar o WhatsApp (somente com aprovação do dono)
 
-- Criar instância e exibir QR code só quando o dono pedir. Nunca versione QR code.
+- Criar instância: pode ser feita sem QR code (`qrcode: false` em `POST /instance/create`). Ela fica com status `close`, sem conexão ao WhatsApp.
+- Exibir QR code só quando o dono pedir. Nunca versione QR code.
 - Após conectar, liste os grupos ativos e o dono escolhe quais monitorar.
 - Nenhum envio real acontece sem aprovação explícita do dono, caso a caso.
 
