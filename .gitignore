@@ -1,6 +1,7 @@
 .env
 .env.*
 !.env.example
+.pgpass
 *.log
 node_modules/
 __pycache__/
@@ -8,5 +9,10 @@ __pycache__/
 data/
 sessions/
 qr/
+pg/
+evolution-api/
+instances/
+store/
+*.dump
 *.pem
 *.key
