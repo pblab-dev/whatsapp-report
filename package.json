@@ -1,0 +1,13 @@
+{
+  "name": "whatsapp-report",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Ambiente local do WhatsApp Report: PostgreSQL embutido e scripts de instalação da Evolution API (somente 127.0.0.1).",
+  "engines": {
+    "node": ">=24"
+  },
+  "dependencies": {
+    "@embedded-postgres/linux-x64": "18.7.0-beta.19",
+    "pg": "8.16.3"
+  }
+}
