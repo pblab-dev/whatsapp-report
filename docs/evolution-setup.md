@@ -2,7 +2,7 @@
 
 Guia de operação da Evolution API local, usada para ler grupos e enviar relatórios via WhatsApp Web. Para o passo a passo do zero, veja `docs/bootstrap.md`.
 
-> ⚠️ A Evolution API usa sessão de WhatsApp Web, que não é oficial. Há risco de bloqueio do número. Use número dedicado (recomendado, não obrigatório) e envios em volume baixo.
+> ⚠️ A Evolution API usa sessão de WhatsApp Web, que não é oficial. Há risco de bloqueio do número. Use um número de WhatsApp normal (não Business), que reduz bastante o risco de bloqueio, e envios em volume baixo.
 
 ## 1. Controle dos processos (obrigatório)
 

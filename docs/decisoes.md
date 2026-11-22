@@ -7,7 +7,7 @@
 - **Teto inicial de envio (sugestão, aguardando aprovação do dono):** 1 relatório por dia por destinatário, com pausas entre envios.
 - **Formato:** texto no WhatsApp, ou API para Power BI ou banco, se o usuário fornecer.
 - **Formato do texto:** título com emoji de tema, linha de contexto, veredito na primeira tela, tabelas, diagnóstico, impacto e limitações.
-- **Número:** dedicado é recomendado, mas não obrigatório.
+- **Número:** recomendar um número de WhatsApp normal (não Business), que reduz bastante o risco de bloqueio. Decisão do dono em 2026-11-22.
 - **Risco:** a sessão do WhatsApp Web não é oficial. O alerta de risco de bloqueio é dado somente ao dono.
 - **Autorização:** criar integrações, instâncias, rotinas, grupos ou alterar instruções exige aprovação explícita do dono. Cada envio real também exige aprovação caso a caso.
 - **Produto:** produto próprio, inspirado em funcionalidades publicamente observáveis de concorrentes, com código próprio.

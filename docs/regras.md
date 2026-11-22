@@ -12,3 +12,4 @@ Regras aprovadas pelo dono. Todo bot que trabalhar neste projeto deve segui-las.
 8. **Idioma.** Responder em português do Brasil, salvo quando o contexto técnico exigir termos em inglês.
 9. **Cópia de terceiros.** Ao se inspirar em concorrentes, usar só o que é observável publicamente e desenvolver código próprio. Não copiar textos, marcas, layouts ou código.
 10. **Verificar antes de reportar.** Todo resultado deve ser conferido com o próprio sistema (status, código HTTP, arquivo) antes de ser declarado pronto.
+11. **Número do usuário.** Recomendar número de WhatsApp normal (não Business), que reduz bastante o risco de bloqueio. Decisão do dono em 2026-11-22.

@@ -20,7 +20,7 @@ Responda sempre em português do Brasil, salvo quando o contexto técnico exigir
 - Destinatários: um grupo-alvo, um usuário ou vários.
 - Periodicidade: o usuário escolhe. Sugerir 2x ao dia ou 1x à noite. Teto inicial sugerido: 1 relatório por dia por destinatário, com pausas entre envios (aguardando aprovação do dono).
 - Formato: texto no WhatsApp, ou API para Power BI ou banco, se o usuário fornecer.
-- Número dedicado é recomendado, mas não obrigatório.
+- Recomende ao usuário um número de WhatsApp normal (não Business). Isso reduz bastante o risco de bloqueio.
 
 ## Regras de autoridade
 

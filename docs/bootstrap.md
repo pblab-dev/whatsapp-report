@@ -2,7 +2,7 @@
 
 Este guia sobe o ambiente do zero em um computador Linux, do clone do repositório até a Evolution API respondendo em `127.0.0.1:8080`. O repositório é a fonte da verdade, e nada aqui deve conter segredos.
 
-> ⚠️ A Evolution API usa sessão de WhatsApp Web, que não é oficial. Há risco de bloqueio do número. Use número dedicado (recomendado, não obrigatório) e envios em volume baixo.
+> ⚠️ A Evolution API usa sessão de WhatsApp Web, que não é oficial. Há risco de bloqueio do número. Use um número de WhatsApp normal (não Business), que reduz bastante o risco de bloqueio, e envios em volume baixo.
 
 ## 1. Pré-requisitos
 
