@@ -16,3 +16,6 @@ store/
 *.dump
 *.pem
 *.key
+run/
+logs/
+pgdata/
