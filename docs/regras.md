@@ -11,5 +11,8 @@ Regras aprovadas pelo dono. Todo bot que trabalhar neste projeto deve segui-las.
 7. **Alerta de risco.** A Evolution usa sessão de WhatsApp Web, não oficial. O alerta de risco de bloqueio é dado ao dono, não ao usuário final.
 8. **Idioma.** Responder em português do Brasil, salvo quando o contexto técnico exigir termos em inglês.
 9. **Cópia de terceiros.** Ao se inspirar em concorrentes, usar só o que é observável publicamente e desenvolver código próprio. Não copiar textos, marcas, layouts ou código.
-10. **Verificar antes de reportar.** Todo resultado deve ser conferido com o próprio sistema (status, código HTTP, arquivo) antes de ser declarado pronto.
+10. **Verificar antes de reportar.** Todo resultado deve ser conferido com o próprio sistema (status, código HTTP, arquivo, `npm test`) antes de ser declarado pronto.
 11. **Número do usuário.** Recomendar número de WhatsApp normal (não Business), que reduz bastante o risco de bloqueio. Decisão do dono em 2026-11-22.
+12. **Testes sem WhatsApp real.** Os testes usam servidor falso da Evolution em `127.0.0.1` e nunca enviam mensagem real. Teste com contato real só com aprovação caso a caso.
+13. **Dados locais fora do git.** Grupos, números de destinatários, metadados de mensagens e salt ficam em `data/`, que está no `.gitignore`. Nunca versionar nem colar em chat.
+14. **Teto de envio.** Padrão de 1 relatório por dia por destinatário e pausa mínima entre envios. Mudar o teto exige aprovação do dono.

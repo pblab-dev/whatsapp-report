@@ -41,11 +41,11 @@ A Evolution API (código oficial, upstream, tag `2.3.7`) não é versionada aqui
 
 - Nunca versionar tokens, chaves, senhas, sessões, QR codes, dumps de banco ou logs com dados pessoais.
 - Dados de grupos e contatos não entram no repositório.
-- A Evolution API usa sessão de WhatsApp Web (não oficial). Use número dedicado, se possível, e volume baixo.
+- A Evolution API usa sessão de WhatsApp Web (não oficial). Recomendamos número de WhatsApp normal (não Business), que reduz bastante o risco de bloqueio, e volume baixo.
 - Criar instâncias, rotinas ou envios reais exige aprovação explícita do dono.
 
 ## Status
 
-Fase de planejamento e infraestrutura local. Já estão prontos: ambiente local com PostgreSQL e Evolution API, controle de processos, validação da API e guia de bootstrap. Ainda não estão implementados: coleta de dados, geração de relatórios, agendamento e envio pela Evolution.
+MVP implementado no branch `feat/mvp-produto`. Já estão prontos: ambiente local com PostgreSQL e Evolution API, controle de processos, validação da API, guia de bootstrap, coleta de grupos, métricas, relatórios, agendamento e envio pela Evolution, com travas. O envio é simulado por padrão. Envio real exige aprovação do destinatário, `WR_ALLOW_REAL_SEND=1` e `--real`. Teto: 1 relatório por dia por destinatário. Testes com servidor falso (`npm test`), sem WhatsApp real. Pendente: conexão do WhatsApp por QR code. Resumos e alertas (fase 2) e linguagem natural (fase 3) estão fora do MVP.
 
 A Evolution API é o caminho único para leitura de grupos e envio de relatórios, em volume baixo no início. A Cloud API da Meta está fora do MVP e saiu deste repositório (permanece no histórico do git).
